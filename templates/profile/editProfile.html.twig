@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+    <div class="container bootstrap snippets bootdey mt-4">
+
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-3">
+                <div class="text-center">
+                    <img src="assets/images/faces/face28.jpg" class="avatar img-circle img-thumbnail" alt="avatar">
+                    <input type="file" class="form-control mt-4">
+                </div>
+            </div>
+
+            <!-- edit form column -->
+            <div class="col-md-9 personal-info">
+                <div class="alert alert-info alert-dismissable">
+                    <a class="panel-close close" data-dismiss="alert">×</a>
+                    <i class="fa fa-coffee"></i>
+                    This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                </div>
+                <h3>Personal info</h3>
+
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Full Name</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="text" value="dey-dey">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Email</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="text" value="bootdey">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Address</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="text" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Add Car</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="text" value="janesemail@gmail.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Model Car</label>
+                        <div class="col-lg-8">
+                            <div class="ui-select">
+                                <select id="user_time_zone" class="form-control">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
