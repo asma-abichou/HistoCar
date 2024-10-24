@@ -3,59 +3,49 @@
 {% block title %}Profile{% endblock %}
 
 {% block body %}
-    <div class="container bootstrap snippets bootdey mt-4">
 
+    <div class="container bootstrap snippets bootdey mt-5">
         <div class="row">
-            <!-- left column -->
+            <!-- Left column: Profile picture upload -->
             <div class="col-md-3">
                 <div class="text-center">
-                    <img src="assets/images/faces/face28.jpg" class="avatar img-circle img-thumbnail" alt="avatar">
-                    <input type="file" class="form-control mt-4">
+                    <img src="assets/images/faces/face28.jpg" class="avatar img-thumbnail rounded-circle" alt="avatar">
+                    <input type="file" class="form-control mt-3">
                 </div>
             </div>
-
-            <!-- edit form column -->
-            <div class="col-md-9 personal-info">
-                <div class="alert alert-info alert-dismissable">
-                    <a class="panel-close close" data-dismiss="alert">×</a>
-                    <i class="fa fa-coffee"></i>
-                    This is an <strong>.alert</strong>. Use this to show important messages to the user.
-                </div>
-                <h3>Personal info</h3>
-
+            <!-- Edit form column -->
+            <div class="col-md-9">
+                <h3 class="mb-4">Personal Info</h3>
                 <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Full Name</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" type="text" value="dey-dey">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Email</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" type="text" value="bootdey">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Address</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" type="text" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Add Car</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" type="text" value="janesemail@gmail.com">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Model Car</label>
-                        <div class="col-lg-8">
-                            <div class="ui-select">
-                                <select id="user_time_zone" class="form-control">
 
-                                </select>
-                            </div>
+                    <!-- Full Name -->
+                    <div class="mb-3 row">
+                        <label class="col-lg-3 col-form-label">Full Name</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" value="{{ user.fullName }}" placeholder="Enter your full name">
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3 row">
+                        <label class="col-lg-3 col-form-label">Email</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="email" value="{{ user.email }}" placeholder="Enter your email">
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="mb-3 row">
+                        <label class="col-lg-3 col-form-label">Address</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" value="{{ user.address }}" placeholder="Enter your address">
+                        </div>
+                    </div>
+
+                    <!-- Modify button -->
+                    <div class="row">
+                        <div class="col-lg-9 offset-lg-3">
+                            <button class="btn btn-primary btn-lg" type="submit">Modify</button>
                         </div>
                     </div>
                 </form>
