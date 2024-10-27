@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add Car & Maintenance{% endblock %}
+
+
+{% block body %}
+
+{% include 'partials/_header.html.twig'%}
+<div class="container-fluid page-body-wrapper">
+    <div class="container-scroller">
+    {% include 'partials/sideBar.html.twig' %}
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h1 class="mt-4">Add Your Car </h1>
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                    <div class="mb-3 row">
+                        <label class="col-lg-3 col-form-label">Make</label>
+                        <div class="col-lg-9">
+                            {{ form_widget(form.make, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-lg-3 col-form-label">Model</label>
+                        <div class="col-lg-9">
+                            {{ form_widget(form.model, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-lg-3 col-form-label">Type</label>
+                        <div class="col-lg-9">
+                            {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-lg-3 col-form-label">Year</label>
+                        <div class="col-lg-9">
+                            {{ form_widget(form.year, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-lg-3 col-form-label">Date</label>
+                        <div class="col-lg-9">
+                            {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label class="col-lg-3 col-form-label">Mileage</label>
+                        <div class="col-lg-9">
+                            {{ form_widget(form.mileage, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-9 offset-lg-3">
+                            <button class="btn btn-primary btn-lg" type="submit">Save</button>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

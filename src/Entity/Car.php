@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CarRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
@@ -22,8 +23,7 @@ class Car
     #[ORM\Column(length: 255)]
     private ?string $year = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $vin = null;
+
 
     #[ORM\Column]
     private ?int $mileAge = null;
@@ -33,6 +33,12 @@ class Car
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
     private ?User $User = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $type = null;
+
+    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $date = null;
 
     public function getId(): ?int
     {
@@ -75,18 +81,6 @@ class Car
         return $this;
     }
 
-    public function getVin(): ?string
-    {
-        return $this->vin;
-    }
-
-    public function setVin(?string $vin): static
-    {
-        $this->vin = $vin;
-
-        return $this;
-    }
-
     public function getMileAge(): ?int
     {
         return $this->mileAge;
@@ -119,6 +113,30 @@ class Car
     public function setUser(?User $User): static
     {
         $this->User = $User;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeImmutable
+    {
+        return $this->date;
+    }
+
+    public function setDate(?\DateTimeImmutable $date): static
+    {
+        $this->date = $date;
 
         return $this;
     }

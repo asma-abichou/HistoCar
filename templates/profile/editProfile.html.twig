@@ -3,52 +3,58 @@
 {% block title %}Profile{% endblock %}
 
 {% block body %}
-
-    <div class="container bootstrap snippets bootdey mt-5">
-        <div class="row">
-            <!-- Left column: Profile picture upload -->
-            <div class="col-md-3">
-                <div class="text-center">
-                    <img src="assets/images/faces/face28.jpg" class="avatar img-thumbnail rounded-circle" alt="avatar">
-                    <input type="file" class="form-control mt-3">
-                </div>
-            </div>
+ {% include 'partials/_header.html.twig' %}
+    <div class="container-fluid page-body-wrapper">
+        <div class="container-scroller">
+            {%  include 'partials/sideBar.html.twig' %}
+                <div class="content-wrapper">
+                    <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <img src="assets/images/faces/face28.jpg" class="avatar img-thumbnail rounded-circle" alt="avatar">
+                            <input type="file" class="form-control mt-3">
+                        </div>
+                    </div>
             <!-- Edit form column -->
-            <div class="col-md-9">
-                <h3 class="mb-4">Personal Info</h3>
-                <form class="form-horizontal" role="form">
+                <div class="col-md-9">
+                    <h3 class="mb-4">Personal Info</h3>
+                    {{ form_start(form) }}
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-dismissible alert-success">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            <strong>{{ message }} !</strong>
+                        </div>
+                    {% endfor %}
+                        <!-- Full Name -->
+                        <div class="mb-3 row">
+                            <label class="col-lg-3 col-form-label">Full Name</label>
+                                <div class="col-lg-9">
+                                    {{ form_widget(form.fullName, {'attr': {'placeholder': 'Enter your full name'}}) }}
+                                </div>
+                        </div>
+                        <!-- Email -->
+                        <div class="mb-3 row">
+                            <label class="col-lg-3 col-form-label">Email</label>
+                             <div class="col-lg-9">
+                                {{ form_widget(form.email, {'attr': {'placeholder': 'Enter your email'}}) }}
+                            </div>
+                        </div>
 
-                    <!-- Full Name -->
-                    <div class="mb-3 row">
-                        <label class="col-lg-3 col-form-label">Full Name</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" type="text" value="{{ user.fullName }}" placeholder="Enter your full name">
+                        <!-- Address -->
+                        <div class="mb-3 row">
+                            <label class="col-lg-3 col-form-label">Address</label>
+                              <div class="col-lg-9">
+                                {{ form_widget(form.address, {'attr': {'placeholder': 'Enter your address'}}) }}
+                                </div>
                         </div>
                     </div>
-
-                    <!-- Email -->
-                    <div class="mb-3 row">
-                        <label class="col-lg-3 col-form-label">Email</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" type="email" value="{{ user.email }}" placeholder="Enter your email">
-                        </div>
-                    </div>
-
-                    <!-- Address -->
-                    <div class="mb-3 row">
-                        <label class="col-lg-3 col-form-label">Address</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" type="text" value="{{ user.address }}" placeholder="Enter your address">
-                        </div>
-                    </div>
-
-                    <!-- Modify button -->
                     <div class="row">
                         <div class="col-lg-9 offset-lg-3">
                             <button class="btn btn-primary btn-lg" type="submit">Modify</button>
                         </div>
                     </div>
-                </form>
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </div>

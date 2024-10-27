@@ -19,19 +19,18 @@ class ProfileController extends AbstractController
     #[Route('/profile', name: 'profile' , methods: ['POST', 'GET'])]
     public function index(Request $request): Response
     {
-        // Retrieve the current user
-       $user = $this->getUser();
-       $form = $this->createForm(ProfileFormType::class, $user);
-       $form->handleRequest($request);
-       dd($form);
-       if($form->isSubmitted() && $form->isValid()) {
-        $form->getData();
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-           $this->addFlash('success',
-               "your account has been modified ");
-       }
+        $user = $this->getUser();
+        $form = $this->createForm(ProfileFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+            $this->addFlash('success', "Your account has been modified.");
+        }
+
         return $this->render('profile/editProfile.html.twig', [
+            'form' => $form->createView(),
             'user' => $user,
         ]);
     }
