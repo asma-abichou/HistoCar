@@ -19,7 +19,7 @@ class DashboardController extends AbstractController
             'controller_name' => 'DashboardController',
         ]);
     }
-    #[Route('/new', name: 'maintenance_new', methods: ['GET', 'POST'])]
+    #[Route('/api/add/car', name: 'add_car', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $myCar = new Car;
