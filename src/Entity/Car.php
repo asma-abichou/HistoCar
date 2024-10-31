@@ -15,30 +15,27 @@ class Car
     private ?int $id = null;
 
     #[ORM\Column(length: 60)]
-    private ?string $make = null;
+    private ?string $make ;
 
     #[ORM\Column(length: 50)]
-    private ?string $model = null;
+    private ?string $model;
 
     #[ORM\Column(length: 255)]
-    private ?string $year = null;
+    private ?string $year;
 
 
 
     #[ORM\Column]
-    private ?int $mileAge = null;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $lastServiceDate = null;
+    private ?int $mileAge;
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
-    private ?User $User = null;
+    private ?User $User;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $type = null;
+    private ?string $type;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
-    private ?\DateTimeImmutable $date = null;
+    private ?\DateTimeImmutable $date ;
 
     public function getId(): ?int
     {
@@ -93,17 +90,6 @@ class Car
         return $this;
     }
 
-    public function getLastServiceDate(): ?\DateTimeImmutable
-    {
-        return $this->lastServiceDate;
-    }
-
-    public function setLastServiceDate(\DateTimeImmutable $lastServiceDate): static
-    {
-        $this->lastServiceDate = $lastServiceDate;
-
-        return $this;
-    }
 
     public function getUser(): ?User
     {

@@ -6,12 +6,18 @@ use App\Entity\Car;
 use App\Form\MaitenanceCarType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class DashboardController extends AbstractController
 {
+    public function __construct ( private EntityManagerInterface $entityManager)
+    {
+
+    }
     #[Route('/dashboard', name: 'dashboard')]
     public function home(): Response
     {
@@ -19,8 +25,9 @@ class DashboardController extends AbstractController
             'controller_name' => 'DashboardController',
         ]);
     }
-    #[Route('/api/add/car', name: 'add_car', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+
+    #[Route('/api/car', name: 'api_car_add', methods: ['GET','POST'])]
+    public function addCar(Request $request ): Response
     {
         $myCar = new Car;
         $myCar->setUser($this->getUser());
@@ -29,8 +36,8 @@ class DashboardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($myCar);
-            $entityManager->flush();
+            $this->entityManager->persist($myCar);
+            $this->entityManager->flush();
 
             $this->addFlash('success', 'Maintenance record added successfully!');
             return $this->redirectToRoute('maintenance_list');
@@ -39,6 +46,7 @@ class DashboardController extends AbstractController
         return $this->render('Maintenance/new.html.twig', [
             'form' => $form->createView(),
         ]);
+
     }
 
 }

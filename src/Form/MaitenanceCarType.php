@@ -18,7 +18,7 @@ class MaitenanceCarType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('make')
+            ->add('make', ChoiceType::class,)
             ->add('model')
             ->add('year')
             ->add('type', ChoiceType::class, [

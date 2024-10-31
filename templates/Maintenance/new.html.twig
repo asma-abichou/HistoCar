@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Add Car & Maintenance{% endblock %}
-{% block body %}
+{% block title %}Add Car{% endblock %}
 
+{% block body %}
+<div class="container-scroller">
 {% include 'partials/_header.html.twig'%}
 <div class="container-fluid page-body-wrapper">
-    <div class="container-scroller">
     {% include 'partials/sideBar.html.twig' %}
         <div class="content-wrapper">
             <div class="row">
@@ -15,7 +15,7 @@
                     <div class="mb-3 row">
                         <label class="col-lg-3 col-form-label">Make</label>
                         <div class="col-lg-9">
-                            {{ form_widget(form.make, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_widget(form.make, {'attr': {'class': 'form-control' , 'id': 'SelectMakeId', 'class': 'btnSelectMake'}}) }}
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -60,4 +60,46 @@
         </div>
     </div>
 </div>
+ <script>
+     <script src="script.js"></script>
+     let selectModelBtn = document.querySelector('.btnSelectMake');
+    if(selectModelBtn){
+        selectModelBtn.addEventListener('onclick',() => {
+            fetchCarModel()
+        })
+    }
+
+ async function fetchCarModel(){
+     const fetchPromise = fetch("https://api.api-ninjas.com/v1/carmakes");
+     fetchPromise.then(response => {
+         return response.json();
+     }).then(carmakes => {
+         console.log(carmakes);
+     });
+
+     //const API_KEY = 'BmkjbxbJdUDebq7e40gr2Q==jL3XvpCBOQOxcejn';
+     //let url = 'https://api.api-ninjas.com/v1/carmakes';
+
+    /* try{
+         let url = 'https://api.api-ninjas.com/v1/carmakes';
+         let response = await fetch(url);
+
+          if (!response.ok) {
+              throw new Error(`Failed to fetch car models: ${response.status}`);
+            }
+
+         const models = await response.json();
+           models.forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model.model;
+                    option.textContent = model.model;
+                    makeSelect.appendChild(option);
+                });
+         console.log(response);
+     }catch (error){
+
+     }*/
+
+ }
+ </script>
 {% endblock %}
