@@ -20,9 +20,6 @@ export function fetchCarModel() {
 }
 
 
-
-
-
     //const API_KEY = 'BmkjbxbJdUDebq7e40gr2Q==jL3XvpCBOQOxcejn';
     //let url = 'https://api.api-ninjas.com/v1/carmakes';
 

@@ -21,12 +21,10 @@ class DashboardController extends AbstractController
     #[Route('/dashboard', name: 'dashboard')]
     public function home(): Response
     {
-        return $this->render('dashboard/home.html.twig', [
-            'controller_name' => 'DashboardController',
-        ]);
+        return $this->render('dashboard/home.html.twig');
     }
 
-    #[Route('/api/car', name: 'api_car_add', methods: ['GET','POST'])]
+    #[Route('/api/car', name: 'car_new_add', methods: ['GET','POST'])]
     public function addCar(Request $request ): Response
     {
         $myCar = new Car;
