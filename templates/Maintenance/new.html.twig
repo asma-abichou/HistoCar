@@ -2,24 +2,55 @@
 
 {% block pageTitle %}Add Car{% endblock %}
 
+
 {% block pageBody %}
-    <div class="row">
-        <div class="form-group col-md-5">
-            <label for="SelectMakeChoice">Make</label>
-            <select  id="btnSelectMake" class="form-control">
-                <option> </option>
-            </select>
+<div class="container mt-5">
+    <h3 class="mb-4">Register Car</h3>
+    <form id="carRegistrationForm">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="SelectMakeChoice" class="form-label">Make</label>
+                    <select id="btnSelectMake" class="form-control" required>
+                        <option value="">Select a Car Make</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="SelectModelChoice" class="form-label">Model</label>
+                    <select id="btnSelectModel" class="form-control" required>
+                        <option value="">Select a Car Model</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group-lg">
+                    <label for="SelectYearChoice" class="form-label">Year</label>
+                    <select id="btnSelectYear" class="form-control" required>
+                        <option value="">Select a Car Year</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group-sm">
+                    <label for="mileage" class="form-label">Mileage</label>
+                    <div class="input-group">
+                        <input type="number" id="mileage" name="mileage" class="form-control" placeholder="Enter mileage" required>
+                        <span class="input-group-text">km</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group col-md-5">
-            <label for="SelectModelChoice">Type</label>
-            <select  id="btnSelectModel" class="form-control">
-                <option> </option>
-            </select>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('register_car') }}">
+
+        <div class="d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-primary">Register Car</button>
         </div>
-        {#<div class="col-md-5">
-            <label for="" class="form-label">Address</label>
-            <input type="text" class="form-control">
-        </div>#}
+    </form>
     </div>
 {% endblock %}
 

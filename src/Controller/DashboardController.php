@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class DashboardController extends AbstractController
 {
-    public function __construct ( private EntityManagerInterface $entityManager)
+    public function __construct ( private readonly EntityManagerInterface $entityManager)
     {
 
     }
@@ -24,27 +24,30 @@ class DashboardController extends AbstractController
         return $this->render('dashboard/home.html.twig');
     }
 
-    #[Route('/api/car', name: 'car_new_add', methods: ['GET','POST'])]
-    public function addCar(Request $request ): Response
+    #[Route('/add/car', name: 'car_register_form', methods: ['GET'])]
+    public function showCarRegisterForm(): Response
     {
-        $myCar = new Car;
-        $myCar->setUser($this->getUser());
+        return $this->render('Maintenance/new.html.twig'); // Render the form view template
+    }
 
-        $form = $this->createForm(MaitenanceCarType::class, $myCar);
-        $form->handleRequest($request);
+    #[Route('/register/car', name: 'car_new_add', methods: ['GET','POST'])]
+    public function addCar(Request $request ): JsonResponse
+    {
+        // Parse JSON data from the request
+        $data = json_decode($request->getContent(), true);
+        // Create and persist the Car entity
+        $car = new Car;
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->persist($myCar);
-            $this->entityManager->flush();
+        $car->setMake($data['make']);
+        //dd($car);
+        $car->setModel($data['model']);
+        $car->setYear((int) $data['year']);
+        $car->setMileage((int) $data['mileage']);
 
-            $this->addFlash('success', 'Maintenance record added successfully!');
-            return $this->redirectToRoute('maintenance_list');
-        }
+        $this->entityManager->persist($car);
+        $this->entityManager->flush();
 
-        return $this->render('Maintenance/new.html.twig', [
-            'form' => $form->createView(),
-        ]);
-
+        return new JsonResponse(['message' => 'Car registered successfully'], 200);
     }
 
 }
