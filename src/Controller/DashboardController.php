@@ -50,4 +50,14 @@ class DashboardController extends AbstractController
         return new JsonResponse(['message' => 'Car registered successfully'], 200);
     }
 
+    #[Route('/list/car', name: 'list_car', methods: ['GET'])]
+    public function showCarListSaved(): Response
+    {
+        $car = $this->entityManager->getRepository(Car::class)->findAll();
+
+        return $this->render('Maintenance/list.html.twig', [
+            'cars'=> $car
+        ]); // Render the form view template
+    }
+
 }

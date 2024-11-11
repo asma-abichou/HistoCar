@@ -1,0 +1,45 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block pageTitle %}List Car{% endblock %}
+
+
+{% block pageBody %}
+    <div class="row">
+      <div class="col-lg-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Car List saved</h4>
+            <p class="card-description"> Add class <code>.table</code>
+            </p>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>Mile Age</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for car in cars %}
+                  <tr>
+                    <td>{{ car.make }}</td>
+                    <td>{{ car.model }}</td>
+                    <td>1{{ car.year }}</td>
+                    <td><label class="badge badge-danger">{{ car.mileAge }} km</label></td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block additionalJavascript %}
+
+{% endblock %}
+
