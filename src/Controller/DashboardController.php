@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Car;
-use App\Form\MaitenanceCarType;
+use App\Form\MaintenanceFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -57,6 +57,17 @@ class DashboardController extends AbstractController
 
         return $this->render('Maintenance/list.html.twig', [
             'cars'=> $car
+        ]); // Render the form view template
+    }
+
+    #[Route('/add/Maintenance', name: 'add_maintenance', methods: ['GET'])]
+    public function CreateMaintenanceCar(Request $request): Response
+    {
+
+        $form = $this->createForm(MaintenanceFormType::class);
+        $form->handleRequest($request);
+        return $this->render('Maintenance/CreateMaintenance.html.twig', [
+            'form'=> $form
         ]); // Render the form view template
     }
 

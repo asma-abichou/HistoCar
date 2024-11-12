@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CarRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,6 +38,17 @@ class Car
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $date ;
+
+    /**
+     * @var Collection<int, Maintenance>
+     */
+    #[ORM\OneToMany(targetEntity: Maintenance::class, mappedBy: 'Car')]
+    private Collection $maintenances;
+
+    public function __construct()
+    {
+        $this->maintenances = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -123,6 +136,36 @@ class Car
     public function setDate(?\DateTimeImmutable $date): static
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Maintenance>
+     */
+    public function getMaintenances(): Collection
+    {
+        return $this->maintenances;
+    }
+
+    public function addMaintenance(Maintenance $maintenance): static
+    {
+        if (!$this->maintenances->contains($maintenance)) {
+            $this->maintenances->add($maintenance);
+            $maintenance->setCar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMaintenance(Maintenance $maintenance): static
+    {
+        if ($this->maintenances->removeElement($maintenance)) {
+            // set the owning side to null (unless already changed)
+            if ($maintenance->getCar() === $this) {
+                $maintenance->setCar(null);
+            }
+        }
 
         return $this;
     }

@@ -4,11 +4,11 @@
 
 
 {% block pageBody %}
-<div class="container mt-5">
+<div class="container mt-12">
     <h3 class="mb-4">Register Car</h3>
     <form id="carRegistrationForm">
         <div class="row g-3">
-            <div class="col-md-6">
+            <div class="row">
                 <div class="form-group">
                     <label for="SelectMakeChoice" class="form-label">Make</label>
                     <select id="btnSelectMake" class="form-control" required>
@@ -17,7 +17,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="row">
                 <div class="form-group">
                     <label for="SelectModelChoice" class="form-label">Model</label>
                     <select id="btnSelectModel" class="form-control" required>
@@ -26,8 +26,8 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="form-group-lg">
+            <div class="row">
+                <div class="form-group">
                     <label for="SelectYearChoice" class="form-label">Year</label>
                     <select id="btnSelectYear" class="form-control" required>
                         <option value="">Select a Car Year</option>
@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="row">
                 <div class="form-group-sm">
                     <label for="mileage" class="form-label">Mileage</label>
                     <div class="input-group">
@@ -45,9 +45,8 @@
                 </div>
             </div>
         </div>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('register_car') }}">
 
-        <div class="d-flex justify-content-end mt-4">
+        <div class="d-flex justify-content mt-5">
             <button type="submit" class="btn btn-primary">Register Car</button>
         </div>
     </form>

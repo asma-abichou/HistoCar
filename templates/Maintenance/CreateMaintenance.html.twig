@@ -1,0 +1,85 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block pageTitle %}Add Maintenance{% endblock %}
+
+{% block pageBody %}
+    <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Add Maintenance Record</h4>
+                    <form method="post">
+                        {{ form_start(form) }}
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form_row(form.serviceDate, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Checkboxes with Bootstrap styling -->
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    {{ form_widget(form.oilChange, {'attr': {'class': 'form-check-input'}}) }}
+                                    {{ form_label(form.oilChange, 'Oil Change', {'label_attr': {'class': 'form-check-label'}}) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    {{ form_widget(form.brakeInspection, {'attr': {'class': 'form-check-input'}}) }}
+                                    {{ form_label(form.brakeInspection, 'Brake Inspection', {'label_attr': {'class': 'form-check-label'}}) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    {{ form_widget(form.tireChange, {'attr': {'class': 'form-check-input'}}) }}
+                                    {{ form_label(form.tireChange, 'Tire Change', {'label_attr': {'class': 'form-check-label'}}) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    {{ form_widget(form.filterChange, {'attr': {'class': 'form-check-input'}}) }}
+                                    {{ form_label(form.filterChange, 'Filter Change', {'label_attr': {'class': 'form-check-label'}}) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    {{ form_widget(form.fluidTopUp, {'attr': {'class': 'form-check-input'}}) }}
+                                    {{ form_label(form.fluidTopUp, 'Fluid Top-Up', {'label_attr': {'class': 'form-check-label'}}) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mt-3">Save Maintenance</button>
+                        {{ form_end(form) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
+
+{% block additionalJavascript %}
+{% endblock %}
