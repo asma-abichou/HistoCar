@@ -25,8 +25,6 @@ class Car
     #[ORM\Column(length: 255)]
     private ?string $year;
 
-
-
     #[ORM\Column]
     private ?int $mileAge;
 
@@ -44,6 +42,7 @@ class Car
      */
     #[ORM\OneToMany(targetEntity: Maintenance::class, mappedBy: 'Car')]
     private Collection $maintenances;
+
 
     public function __construct()
     {
@@ -169,4 +168,5 @@ class Car
 
         return $this;
     }
+
 }

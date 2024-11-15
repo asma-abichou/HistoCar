@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Entity\Maintenance;
 use App\Form\MaintenanceFormType;
+use App\Repository\CarRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -57,18 +59,25 @@ class DashboardController extends AbstractController
 
         return $this->render('Maintenance/list.html.twig', [
             'cars'=> $car
-        ]); // Render the form view template
+        ]);
     }
 
-    #[Route('/add/Maintenance', name: 'add_maintenance', methods: ['GET'])]
-    public function CreateMaintenanceCar(Request $request): Response
+    #[Route('/add/Maintenance', name: 'add_maintenance', methods: ['GET','POST'])]
+    public function CreateMaintenanceCar(Request $request , CarRepository $repositoryCar): Response
     {
+        $car = $repositoryCar->findAll();
 
         $form = $this->createForm(MaintenanceFormType::class);
         $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $this->entityManager->persist($form);
+            $this->entityManager->flush();
+        }
         return $this->render('Maintenance/CreateMaintenance.html.twig', [
-            'form'=> $form
-        ]); // Render the form view template
+            'form'=> $form,
+            'cars'=> $car
+        ]);
     }
 
 }

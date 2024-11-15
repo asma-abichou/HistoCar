@@ -48,14 +48,18 @@ class MaintenanceFormType extends AbstractType
                 'label' => 'Fluid Top-Up',
                 'required' => false,
             ])
+            ->add('car', ChoiceType::class, [
+                'label' => 'Choice you car',
+                'choice_name' => (new \App\Entity\Car)->getModel($this, 'name'),
+                'required' => false,
+            ])
         ;
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Car::class,
+            'data_class' => Maintenance::class,
         ]);
     }
 }
