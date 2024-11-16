@@ -65,18 +65,17 @@ class DashboardController extends AbstractController
     #[Route('/add/Maintenance', name: 'add_maintenance', methods: ['GET','POST'])]
     public function CreateMaintenanceCar(Request $request , CarRepository $repositoryCar): Response
     {
-        $car = $repositoryCar->findAll();
-
-        $form = $this->createForm(MaintenanceFormType::class);
+       // $car = $repositoryCar->findAll();
+        $maintenance = new Maintenance();
+        $form = $this->createForm(MaintenanceFormType::class, $maintenance);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
-            $this->entityManager->persist($form);
+            $this->entityManager->persist($maintenance);
             $this->entityManager->flush();
         }
         return $this->render('Maintenance/CreateMaintenance.html.twig', [
             'form'=> $form,
-            'cars'=> $car
         ]);
     }
 

@@ -48,10 +48,11 @@ class MaintenanceFormType extends AbstractType
                 'label' => 'Fluid Top-Up',
                 'required' => false,
             ])
-            ->add('car', ChoiceType::class, [
-                'label' => 'Choice you car',
-                'choice_name' => (new \App\Entity\Car)->getModel($this, 'name'),
-                'required' => false,
+            ->add('car', EntityType::class, [
+                'class' => Car::class,
+                'choice_label' => 'model', // Adjust 'model' to the property you want displayed
+                'label' => 'Select Car Model',
+                'placeholder' => 'Choose a car',
             ])
         ;
     }

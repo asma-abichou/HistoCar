@@ -24,8 +24,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Checkboxes with Bootstrap styling -->
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-check">
@@ -34,7 +32,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-check">
@@ -73,10 +70,8 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-check">
-
-                                    {{ form_widget(form.cars, {'attr': {'class': 'form-check-select'}}) }}
-                                    {{ form_label(form.cars, 'Choice you car', {'label_attr': {'class': 'form-check-label'}}) }}
-
+                                    {{ form_widget(form.car, {'attr': {'class': 'form-check-select'}}) }}
+                                    {{ form_label(form.car, 'Choice you car', {'label_attr': {'class': 'form-check-label'}}) }}
                                 </div>
                             </div>
                         </div>
