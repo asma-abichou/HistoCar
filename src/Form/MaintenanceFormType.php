@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Car;
 use App\Entity\Maintenance;
+use App\Repository\CarRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -50,8 +51,8 @@ class MaintenanceFormType extends AbstractType
             ])
             ->add('car', EntityType::class, [
                 'class' => Car::class,
-                'choice_label' => 'model', // Adjust 'model' to the property you want displayed
-                'label' => 'Select Car Model',
+                'choice_label' => 'make', // Adjust 'model' to the property you want displayed
+                'label' => 'Select Car make',
                 'placeholder' => 'Choose a car',
             ])
         ;

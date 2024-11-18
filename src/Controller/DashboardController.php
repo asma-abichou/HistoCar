@@ -74,8 +74,10 @@ class DashboardController extends AbstractController
             $this->entityManager->persist($maintenance);
             $this->entityManager->flush();
         }
+        $this->addFlash('success', 'Maintenance Registred with success ');
         return $this->render('Maintenance/CreateMaintenance.html.twig', [
             'form'=> $form,
+            'user' => $this->getUser(),
         ]);
     }
 
