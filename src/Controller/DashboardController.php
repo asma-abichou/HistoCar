@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Car;
 use App\Entity\Maintenance;
+use App\Entity\User;
 use App\Form\MaintenanceFormType;
 use App\Repository\CarRepository;
 use Doctrine\ORM\EntityManagerInterface;
