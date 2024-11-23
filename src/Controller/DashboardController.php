@@ -63,7 +63,7 @@ class DashboardController extends AbstractController
     }
 
     #[Route('/add/Maintenance', name: 'add_maintenance', methods: ['GET','POST'])]
-    public function CreateMaintenanceCar(Request $request , CarRepository $repositoryCar): Response
+    public function CreateMaintenanceCar(Request $request): Response
     {
        // $car = $repositoryCar->findAll();
         $maintenance = new Maintenance();
@@ -73,8 +73,18 @@ class DashboardController extends AbstractController
         {
             $this->entityManager->persist($maintenance);
             $this->entityManager->flush();
+
+            // Send Twilio notification
+            $twilioSid = $_ENV['US74b1aea3168a190eee814325fd808e91'];
+            $twilioToken = $_ENV['37a59b617dd00ae2933a15610b0014c'];
+            $twilioServiceSid = $_ENV['ACd411995705537e4bd2381d029fc4499b'];
+            $toPhoneNumber = $_ENV['+21654029103'];
+
+            $client = new User($twilioSid, $twilioToken);
+
+            $this->addFlash('success', 'Maintenance Registred with success ');
         }
-        $this->addFlash('success', 'Maintenance Registred with success ');
+
         return $this->render('Maintenance/CreateMaintenance.html.twig', [
             'form'=> $form,
             'user' => $this->getUser(),
