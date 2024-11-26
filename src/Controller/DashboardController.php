@@ -76,14 +76,31 @@ class DashboardController extends AbstractController
             $this->entityManager->flush();
 
             // Send Twilio notification
-            $twilioSid = $_ENV['US74b1aea3168a190eee814325fd808e91'];
+           /* $twilioSid = $_ENV['US74b1aea3168a190eee814325fd808e91'];
             $twilioToken = $_ENV['37a59b617dd00ae2933a15610b0014c'];
             $twilioServiceSid = $_ENV['ACd411995705537e4bd2381d029fc4499b'];
-            $toPhoneNumber = $_ENV['+21654029103'];
+            $toPhoneNumber = $_ENV['+21654029103'];*/
+            $twilioSid = $this->getParameter('twilio.account_sid');
+            $twilioToken = $this->getParameter('twilio.auth_token');
+            $twilioServiceSid = $this->getParameter('twilio.messaging_service_sid');
+            $toPhoneNumber = $this->getParameter('twilio.to_phone');
 
             $client = new User($twilioSid, $twilioToken);
 
-            $this->addFlash('success', 'Maintenance Registred with success ');
+            try {
+            $message = $client->messages->create(
+                $toPhoneNumber,
+                [
+                    'body' => 'Maintenance record added successfully!',
+                    'messagingServiceSid' => $twilioServiceSid,
+                ]
+            );
+            $this->addFlash('success', 'Maintenance registered successfully and notification sent! Message SID: ' . $message->sid);
+          } catch (\Exception $e) {
+            $this->addFlash('error', 'Maintenance saved, but notification failed: ' . $e->getMessage());
+        }
+
+           // $this->addFlash('success', 'Maintenance Registred with success ');
         }
 
         return $this->render('Maintenance/CreateMaintenance.html.twig', [
