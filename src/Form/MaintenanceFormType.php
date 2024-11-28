@@ -4,15 +4,11 @@ namespace App\Form;
 
 use App\Entity\Car;
 use App\Entity\Maintenance;
-use App\Repository\CarRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,6 +22,11 @@ class MaintenanceFormType extends AbstractType
                 'widget' => 'single_text',
                 'label' => 'Service Date',
             ])
+           ->add('email', EmailType::class, [
+               'required' => true,
+               'label' => 'Email',
+               'attr' => ['class' => 'form-control'],
+           ])
             ->add('description', TextType::class, [
                 'label' => 'Description of Maintenance',
             ])

@@ -41,6 +41,9 @@ class Maintenance
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column(length: 50)]
+    private ?string $email = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -138,6 +141,18 @@ class Maintenance
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
 
         return $this;
     }

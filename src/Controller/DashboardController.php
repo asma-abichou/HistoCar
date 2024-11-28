@@ -4,16 +4,20 @@ namespace App\Controller;
 
 use App\Entity\Car;
 use App\Entity\Maintenance;
-use App\Entity\User;
 use App\Form\MaintenanceFormType;
-use App\Repository\CarRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
+
 
 class DashboardController extends AbstractController
 {
@@ -64,43 +68,38 @@ class DashboardController extends AbstractController
     }
 
     #[Route('/add/Maintenance', name: 'add_maintenance', methods: ['GET','POST'])]
-    public function CreateMaintenanceCar(Request $request): Response
+    public function CreateMaintenanceCar(Request $request, MailerInterface $mailer): Response
     {
-       // $car = $repositoryCar->findAll();
+        $transport = Transport::fromDsn('smtp://708b6df491cc4d:********6b1e@sandbox.smtp.mailtrap.io:2525');
+        $mailer = new Mailer($transport);
+
         $maintenance = new Maintenance();
         $form = $this->createForm(MaintenanceFormType::class, $maintenance);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $data = $form->getData();
+            $address = $data->getEmail();
+            $content = $data->getDescription();
+            $email = (new Email())
+                ->from('noreply@example.com')
+                ->to($address)
+                ->subject('Time for Symfony Mailer!')
+                ->text($content)
+                ->html('<p>See Twig integration for better HTML integration!</p>');
+
+            try {
+                $mailer->send($email);
+                echo 'Email sent successfully.';
+            } catch (TransportExceptionInterface $e) {
+                echo 'Failed to send email: ' . $e->getMessage();
+            }
+
             $this->entityManager->persist($maintenance);
             $this->entityManager->flush();
 
-            // Send Twilio notification
-           /* $twilioSid = $_ENV['US74b1aea3168a190eee814325fd808e91'];
-            $twilioToken = $_ENV['37a59b617dd00ae2933a15610b0014c'];
-            $twilioServiceSid = $_ENV['ACd411995705537e4bd2381d029fc4499b'];
-            $toPhoneNumber = $_ENV['+21654029103'];*/
-            $twilioSid = $this->getParameter('twilio.account_sid');
-            $twilioToken = $this->getParameter('twilio.auth_token');
-            $twilioServiceSid = $this->getParameter('twilio.messaging_service_sid');
-            $toPhoneNumber = $this->getParameter('twilio.to_phone');
+            $this->addFlash('success', 'Maintenance registered successfully and SMS sent!');
 
-            $client = new User($twilioSid, $twilioToken);
-
-            try {
-            $message = $client->messages->create(
-                $toPhoneNumber,
-                [
-                    'body' => 'Maintenance record added successfully!',
-                    'messagingServiceSid' => $twilioServiceSid,
-                ]
-            );
-            $this->addFlash('success', 'Maintenance registered successfully and notification sent! Message SID: ' . $message->sid);
-          } catch (\Exception $e) {
-            $this->addFlash('error', 'Maintenance saved, but notification failed: ' . $e->getMessage());
-        }
-
-           // $this->addFlash('success', 'Maintenance Registred with success ');
         }
 
         return $this->render('Maintenance/CreateMaintenance.html.twig', [

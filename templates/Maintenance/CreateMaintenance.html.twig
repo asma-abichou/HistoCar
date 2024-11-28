@@ -28,6 +28,14 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                {{ form_label(form.email, 'Email', {'label_attr': {'class': 'form-check-label'}}) }}
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                             </div>
@@ -88,7 +96,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+    </div>
 
 {% endblock %}
 

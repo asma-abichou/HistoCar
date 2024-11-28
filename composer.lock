@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9a6bb5f6839154ed2d632632426aeb7f",
+    "content-hash": "3b1f60db40acbdc7f992ddadff83caec",
     "packages": [
         {
             "name": "composer/semver",
@@ -3898,6 +3898,71 @@
             "time": "2024-10-25T15:11:02+00:00"
         },
         {
+            "name": "symfony/google-mailer",
+            "version": "v7.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/google-mailer.git",
+                "reference": "15c7493d34ce270ab8fe32c8020d4796e432ab45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/google-mailer/zipball/15c7493d34ce270ab8fe32c8020d4796e432ab45",
+                "reference": "15c7493d34ce270ab8fe32c8020d4796e432ab45",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "symfony/mailer": "^6.4|^7.0"
+            },
+            "require-dev": {
+                "symfony/http-client": "^6.4|^7.0"
+            },
+            "type": "symfony-mailer-bridge",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Mailer\\Bridge\\Google\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Google Mailer Bridge",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/google-mailer/tree/v7.1.6"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-09-25T14:20:29+00:00"
+        },
+        {
             "name": "symfony/http-client",
             "version": "v7.1.8",
             "source": {
@@ -4345,6 +4410,67 @@
                 }
             ],
             "time": "2024-11-08T15:46:42+00:00"
+        },
+        {
+            "name": "symfony/lox24-notifier",
+            "version": "v7.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/lox24-notifier.git",
+                "reference": "4833d636bb04b59da69204ebce8ca3393bcd7e14"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/lox24-notifier/zipball/4833d636bb04b59da69204ebce8ca3393bcd7e14",
+                "reference": "4833d636bb04b59da69204ebce8ca3393bcd7e14",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "symfony/http-client": "^6.4|^7.0",
+                "symfony/notifier": "^7.1"
+            },
+            "require-dev": {
+                "symfony/webhook": "^6.4|^7.0"
+            },
+            "type": "symfony-notifier-bridge",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Notifier\\Bridge\\Lox24\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Symfony LOX24 Notifier Bridge",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "lox24",
+                "notifier",
+                "sms"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/lox24-notifier/tree/v7.1.6"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-09-25T14:20:29+00:00"
         },
         {
             "name": "symfony/mailer",
